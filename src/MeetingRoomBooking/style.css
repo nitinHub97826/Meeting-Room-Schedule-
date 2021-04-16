@@ -1,0 +1,11 @@
+.application-header{
+padding: 14px;
+text-align: center;
+background: #3c91e7;
+color: white;
+font-size: 30px;
+}
+
+html, body, .MeetingRoomBooking, #root {
+    height: 100%;
+  }
