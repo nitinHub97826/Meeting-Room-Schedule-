@@ -66,3 +66,16 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+
+/********************************************************************/
+Clone Code in local Sytem
+---->
+Paste Your   CLIENT_ID, API_KEY of Google calender api in ./src/MeetingRoomBooking/constant/index.js
+---->
+open cmd
+write "npm install" 
+press enter
+---->
+npm start
