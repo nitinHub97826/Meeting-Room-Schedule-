@@ -1,0 +1,35 @@
+.input-container{
+  .MuiFormControl-root.MuiTextField-root.input.MuiFormControl-marginNormal{
+    margin: 5px 0px 8px 0px;
+  }
+}
+
+.input{
+  width: 100%;
+  padding: 12px 20px;
+  border:1px solid;
+  margin: 5px 0px 8px 0px;
+}
+.label{
+    box-sizing: border-box;
+    cursor :default;
+    display :inline;
+    font-family: Verdana, sans-serif;
+    font-size :15px;
+    height: auto;
+    line-height: 22.5px;
+    text-size-adjust: 100%;
+    width :auto;
+}
+
+.input-text {
+    box-sizing: border-box;
+  }
+input[type=button], input[type=submit], input[type=reset] {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-decoration: none;
+    margin: 4px 0px;
+    cursor: pointer;
+  }

@@ -1,16 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import '../src/Components/Style/flex.css'
-// import '../src/Components/Style/card.css'
-
-
-import MeetingRoomBooking from './MeetingRoomBooking'
+import Routing from './Routing'
+import './Style/index.scss'
 
 ReactDOM.render(
-   <React.StrictMode>
-<MeetingRoomBooking />
-
-   </React.StrictMode>
+  //  <React.StrictMode>
+   <Routing />
+  //  </React.StrictMode>
   ,
   document.getElementById('root')
 );

@@ -1,0 +1,48 @@
+.menu-body>.MuiContainer-root.MuiContainer-fixed.MuiContainer-maxWidthLg{
+overflow: auto;
+}
+
+.card-container{
+   flex-grow: 1;
+}
+.row{
+    display: flex;
+    width: 100%;
+    @media (max-width:800px) {
+        flex-direction: column;
+    }
+    .MuiPaper-root.MuiCard-root{
+        flex-grow: 1;
+        margin: 8px 8px 8px 0px;
+            &:last-child{
+        margin-right:0px;
+    }
+    }
+    .MuiFormControl-root.MuiTextField-root{
+        display: flex;
+    }
+}
+.MuiFormControl-root.MuiTextField-root{
+    margin:8px 4px 0px 4px;
+    }
+
+
+// .card{
+//     border-radius: 5px;
+//     box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 5px 0px, rgba(0, 0, 0, 0.16) 0px 2px 5px 0px;
+//     box-sizing :border-box;
+//     color :rgb(0, 0, 0);
+//     justify-content: center;
+//     font-family: Verdana, sans-serif;
+//     font-size :15px;
+//     line-height : 22.5px;
+//     padding : 8px 16px 8px 16px;
+//     text-size-adjust : 100%;
+//     margin: 8px 0px 8px 8px;
+//     height: max-content;
+//     flex-grow: 1;
+//     background-color: $white;
+//     &:last-child{
+//         margin-right: 8px;
+//     }
+// }

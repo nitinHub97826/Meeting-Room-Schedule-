@@ -1,0 +1,15 @@
+.MeetingRoomBooking{
+    .card{
+        justify-content: center;
+        display: flex;
+    }
+    .form{
+        display: inline-block;
+        justify-self: center;
+    }
+    @media   (min-width:700px){
+        .form{
+             width: 45%;
+        }
+    } 
+}

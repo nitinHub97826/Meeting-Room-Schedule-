@@ -17,7 +17,12 @@
     color: black;
     border: 2px solid #3c91e7;
 }
-.time-card:hover,.time-card.selected{
+.time-card:hover{
+    background-color:#3c91e7;
+    color: white;  
+    border: 2px solid #4CAF50;
+}
+.time-card.selected{
     background-color:#3c91e7;
     color: white;  
 }

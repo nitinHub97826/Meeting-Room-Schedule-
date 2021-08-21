@@ -1,0 +1,33 @@
+@import './Constant.scss';
+
+.btn{
+    
+    border: none;
+    padding: 10px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: $font-sm;
+    margin: 4px 4px;
+    min-width: 101px;
+    cursor: pointer;
+
+    &.default{
+        background-color: $gray;
+        color: $black;
+        &:hover:enabled{
+            background-color: $gray-dark;
+        }
+    }
+    &.primary{
+        background-color: $theme;
+        color: $white;
+        &:hover:enabled {
+            background-color: $theme-dark;
+        }
+    }
+    &:disabled{
+        cursor: not-allowed;
+        opacity: .8;
+    }
+}
