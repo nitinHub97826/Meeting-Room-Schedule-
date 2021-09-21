@@ -1,0 +1,4 @@
+export const actionType={
+    GET_GRID_SETTING:"GET_GRID_SETTING",
+    GET_DROPDOWN_DS:"GET_DROPDOWN_DS"
+}

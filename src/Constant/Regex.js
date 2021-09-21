@@ -1,4 +1,4 @@
-const Regex ={
+export const Regex ={
     stringOnly:{
         regex:`[A-Za-z]+[A-Za-z ]*`,
         message:(name)=>{
@@ -12,7 +12,7 @@ const Regex ={
         }
     },
     phoneNo:{
-        regex:`^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$`,
+        regex:`^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$`,
         message:(name)=>{
             return `${name} is not valid`
         }

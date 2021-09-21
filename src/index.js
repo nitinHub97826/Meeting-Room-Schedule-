@@ -1,12 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Routing from './Routing'
+import {Provider} from 'react-redux';
+import {store} from './ReduxStore'
 import './Style/index.scss'
+import Routing from './Routing'
+
+
 
 ReactDOM.render(
-  //  <React.StrictMode>
+  <Provider store={store}>
+   {/* <React.StrictMode> */}
    <Routing />
-  //  </React.StrictMode>
+   {/* </React.StrictMode> */}
+  </Provider>
   ,
   document.getElementById('root')
 );
