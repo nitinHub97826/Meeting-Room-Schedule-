@@ -1,12 +1,17 @@
+import React from 'react';
+import {rowBtnFilter} from '../../Button';
 // import DateFnsUtils from "@date-io/date-fns";
 
 
-export const CalcColumns=(columns)=>{
-    if(!columns || columns.length==0)
+export const CalcColumns=(gridSetting,cellActionProps)=>{
+  const {columns,cellActions}=gridSetting;
+    if( !columns || columns.length==0)
     console.error("CalcColumns error: wrong parameter")
 
- let _col=    columns.filter(f=>(!f.hide || f.field==='id')).map(x=>{
+ let _col=   columns.filter(f=>(!f.hide)).map(x=>{
         const {resizable,...other}=x
+       
+
       return {
         ...other,
         renderCell:((params) => {
@@ -20,23 +25,47 @@ export const CalcColumns=(columns)=>{
         )
       };
     })
-    //  columns.push(
-    // {
-    //   field: 'actions',
-    //   headerName: 'Actions',
-    //   renderCell: CellButton,
-    //   sortable: false,
-    //   width: 100,
-    //   headerAlign: 'center',
-    //   filterable: false,
-    //   align: 'center',
-    //   disableColumnMenu: true,
-    //   disableReorder: true,
-    // })
-    return _col;
-}
+    if(cellActions.length!==0)
+    {
+   let actionProp={};
+   _col=[
+    {
+      field: 'actions',
+      headerName: 'Actions',
+      renderCell: (rc)=>{
+        return (<div key={"action"}>
+             {
+             cellActions.map(x=>{
+              actionProp={
+                ...cellActionProps[x],
+                dataItem:rc
+              };
+              
+              return React.cloneElement( rowBtnFilter({name :x,props:actionProp}),{key:x})
+             })
+             }
+              </div>
+              )
+      },
+      sortable: false,
+      width: 100,
+      headerAlign: 'center',
+      filterable: false,
+      align: 'center',
+      disableColumnMenu: true,
+      disableReorder: true,
+    }
+    ,
+    ..._col
+  ]
+    }
    
-export const TopGridCalcColumns=(gridSettings)=>{
+    return {
+      _columns:_col
+    };
+}
+
+export const TopGridCalcColumns=(gridSettings,cellActionProps)=>{
     
   let keys=Object.keys(gridSettings);
   
@@ -45,7 +74,7 @@ export const TopGridCalcColumns=(gridSettings)=>{
 
   return {
     ...gridSettings[keys[0]],
-    _columns:CalcColumns(gridSettings[keys[0]].columns)
+    ...CalcColumns(gridSettings[keys[0]],cellActionProps)
   } 
 }
 

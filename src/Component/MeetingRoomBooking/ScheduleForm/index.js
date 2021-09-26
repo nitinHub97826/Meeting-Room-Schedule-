@@ -1,5 +1,5 @@
 import React,{memo,useState} from 'react';
-import { Card, Grid, Paper } from '@material-ui/core';
+import { Card, Grid, Paper } from '@mui/material';
 import SelectBox from '../../Common/SelectBox';
 import TextBox from '../../Common/TextBox'
 import './style.scss'

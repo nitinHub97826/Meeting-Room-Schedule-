@@ -1,6 +1,5 @@
 import React,{memo} from 'react';
-import { TextField } from '@material-ui/core';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import {TextField,Autocomplete} from '@mui/material';
 import './style.scss'
 
 const SelectBox=(props)=> {

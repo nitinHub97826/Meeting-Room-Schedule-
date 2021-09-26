@@ -1,37 +1,45 @@
-import React ,{Component} from 'react'
-import { Card, CardContent } from '@material-ui/core';
-import CustDatePicker from '../Common/DatePicker'
-import SelectBox from '../Common/SelectBox'
-import TextBox from '../Common/TextBox'
-import Button from '../Common/Button';
-import { ShowGrid } from '../Common/CusDatagrid/ShowGrid';
+import React ,{Component,Fragment} from 'react'
+import { Card, CardContent } from '@mui/material';
+import { ShowGrid } from '../Common/CusDatagrid/index';
+import AddEdit from './AddEdit'
 
 class Jobs extends Component{
     constructor(props) {
         super(props);
-      
-        this.state={
-          
         }
-        }
-
-componentDidMount=()=>{
-
- 
- 
-}
+     onEdit=(e)=>{
+        console.log('onEdit')
+     }
+     onDelete=(e)=>{
         
-
+       console.log('onDelete',e)
+    }
+componentDidMount(){
+    console.log("job",this.props)
+}
+    
     render(){
        
-    
+    const {onEdit,onDelete}=this
         return(
-           
+           <Fragment>
             <Card>  
-              <CardContent>
-       <ShowGrid {...this.props} />
-        </CardContent>
-      </Card>
+                <CardContent>
+                    <ShowGrid 
+                    {...this.props}
+                    cellActionProps={{
+                        edit:{
+                            onClick:onEdit
+                        },
+                        delete:{
+                            onClick:onDelete
+                        }
+                    }}
+                    />
+                </CardContent>
+            </Card>
+            <AddEdit {...this.props}></AddEdit>
+            </Fragment>
         )
     }
 }

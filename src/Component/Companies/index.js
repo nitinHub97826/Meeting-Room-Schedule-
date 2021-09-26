@@ -1,6 +1,6 @@
 import React ,{Component} from 'react'
-import { Card, CardContent } from '@material-ui/core';
-import { ShowGrid } from '../Common/CusDatagrid/ShowGrid';
+import { Card, CardContent } from '@mui/material';
+import { ShowGrid } from '../Common/CusDatagrid/index';
 
 class Companies extends Component{
     constructor(props) {

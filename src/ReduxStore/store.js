@@ -24,14 +24,14 @@ export  const mapDispatchToProps=(dispatch,ownProps)=>{
 export const saveState = (state) => {
   try {
     const serialState = JSON.stringify(state);
-    localStorage.setItem('appState', serialState);
+  //  localStorage.setItem('appState', serialState);
   } catch(err) {
       console.log(err);
   }
 };
 export const loadState = () => {
   try {
-    const serialState = localStorage.getItem('appState');
+    const serialState = null;//localStorage.getItem('appState');
     if (serialState === null) {
       return undefined;
     }

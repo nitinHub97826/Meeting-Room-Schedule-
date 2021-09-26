@@ -1,9 +1,10 @@
 import React ,{Component} from 'react'
-import { Card, CardContent } from '@material-ui/core';
+import { Card, CardContent } from '@mui/material';
 import CustDatePicker from '../../Common/DatePicker'
 import SelectBox from '../../Common/SelectBox'
 import TextBox from '../../Common/TextBox'
-import Button from '../../Common/Button';
+import {Button} from '../../Common/Button';
+
 const idleDataItem={
   Company:null,
   CompanyId:null,

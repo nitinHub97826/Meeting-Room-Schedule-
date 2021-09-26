@@ -1,9 +1,9 @@
 import React from 'react'
-import Button from '../Common/Button'
+import {Button} from '../Common/Button'
 import TextBox from '../Common/TextBox'
 // import CustDatePicker from '../Common/DatePicker'
 // import Upload from '../Common/Upload'
-import { Card, CardActions, CardContent, CardHeader, Container, FormControl } from '@material-ui/core'
+import { Card, CardActions, CardContent, CardHeader } from '@mui/material'
 
 const InterviewRecord =()=>{
     return(

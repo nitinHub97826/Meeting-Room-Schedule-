@@ -1,63 +1,110 @@
-import React, { useEffect, useState } from 'react';
+import React, {Component } from 'react';
 import CusDataGrid from '../index.js';
-import {  useSelector, useDispatch } from "react-redux";
 import {CalcColumns,GridDefaultSetting,TopGridCalcColumns} from '../';
 import ApiCall from '../../ApiCall/index.js';
 
-export const ShowGrid=ApiCall((props)=>{
-  const GridSetting = useSelector(state => state.reducer.GridSetting);
-const {apiCall,currentMenu,actions}=props
-const {name}=currentMenu
-const [pageSize, setPageSize] = useState(GridDefaultSetting._pageSize);
-const [filter, setFilter] = useState();
-const [page, setPage] = useState(0);
-const [sortModel, setSortModel] = React.useState([]);
 
-const [data,setData]=useState({data:[],total:0});
-const [columns,setColumns]=useState({
-  _columns:[]
-});
+class ShowGrid extends Component{
 
+  constructor(props){
+    super(props)
+    this.state={
+      data:{data:[],total:0},
+      dataState:{
+        page:0,
+        pageSize:GridDefaultSetting._pageSize,
+        filter:null,
+        sort:[],
 
+      },
+      columns:{
+        _columns:[]
+      }
+    }
   
-  useEffect(()=>{
-     if((!(name in   GridSetting))){
+  }
+  componentDidMount=()=>{
+    const {currentMenu,actions,appState}=this.props
+  
+    const {name}=currentMenu
+    const {GridSetting}=appState.reducer
+    
+    if((!(name in   GridSetting))){
       actions.reducer.GetGridSetting(currentMenu)
      }
      else{
-      setColumns(TopGridCalcColumns(GridSetting[name])) 
+     this.setColumns();
      }
-    },[GridSetting])
+  }
 
-    useEffect(()=>{
-      
-      const {id}=currentMenu
-    if(columns.gridId){
-      apiCall.postCall({url:"Common/GetGridDataSource", payload:{menuid:id,gridid:columns.gridId, page:page,take:pageSize,fiter:filter,sort:sortModel}, onSuccess:(r)=>{
-        setData(r.data)
-      }})
+  setColumns=()=>{
+    const {cellActionProps,appState,currentMenu}=this.props
+    const {name}=currentMenu
+    const {GridSetting}=appState.reducer
+    let column=(TopGridCalcColumns(GridSetting[name],cellActionProps)) 
+ 
+    this.setState((s,p)=>({
+      ...s
+      ,columns:column
+    }),()=>this.GetData())
+  }
+
+  componentDidUpdate(prevProps) {
+    const {columns}=this.state
+    if(columns && columns._columns.length==0){
+      this.setColumns();
     }
-  
-     
-    },[pageSize,columns,page,filter,sortModel])
-  
+  }
+
+  GetData=()=>{
+ const {currentMenu,apiCall}=   this.props
+ const {columns,dataState}=this.state
+
+
+  const {id}=currentMenu
+    if(columns.gridId){
+      apiCall.postCall({url:"Common/GetGridDataSource", payload:{menuid:id,gridid:columns.gridId, ...dataState}, onSuccess:(r)=>{
+        this.setState((s,p)=>({
+          ...s,
+          data:r.data
+        }))
+      }})
+  }
+}
+  setDataState=(ds)=>{
+    this.setState((s,p)=>({
+      ...s
+      ,dataState:{
+        ...ds
+      }
+    })
+    ,this.GetData())
+  }
+
+
+
+
+
+
+  render(){
+    const {setDataState,state}=this
+    const {data,dataState,columns}=state
 return(
     <div style={{ height: '90%', width: '100%' }}>
       <CusDataGrid 
-      {...GridDefaultSetting }
       checkboxSelection
+      idField={columns.idField}
       rows={data.data} 
       rowCount={data.total}
       columns={columns._columns} 
-      pageSize={pageSize}
-      onPageSizeChange={(x) => setPageSize(x)}
-      page={page}
-      onPageChange={(x) => setPage(x)}
-      onFilterModelChange={x=>setFilter(x)}
-      sortModel={sortModel}
-      onSortModelChange={ (x) =>setSortModel(x)}
+      {...dataState}
+      onDataStateChange={setDataState}
+    
       />
     </div>
 )
-})
+}
 
+}
+const _ShowGrid= ApiCall(ShowGrid)
+export {_ShowGrid  as ShowGrid};

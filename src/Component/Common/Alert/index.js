@@ -1,6 +1,5 @@
-import React,{useEffect,memo}from "react";
-import {Snackbar} from '@material-ui/core';
-import Alert from '@material-ui/lab/Alert';
+import React,{memo}from "react";
+import {Alert,Snackbar} from '@mui/material';
 
 
 export const AlertMemo=memo((props)=> {
@@ -12,7 +11,7 @@ const {msg,severity="success"}=props
 
 return(
         <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={true} autoHideDuration={5000}>
-            <AlertMemo severity>
+            <AlertMemo severity={severity}>
                 {msg}
             </AlertMemo>
         </Snackbar>

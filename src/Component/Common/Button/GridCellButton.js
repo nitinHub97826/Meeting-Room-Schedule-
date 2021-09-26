@@ -1,33 +1,68 @@
-import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/DeleteOutlined';
+import React,{memo} from 'react';
+import { IconBtn ,fontSize} from '.';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/DeleteOutlined';
+import CancelIcon from '@mui/icons-material/Close';
 
-export const edit=(props)=>{
-    
+export const EditRowBtn=memo((props)=>{
+  
+  
  return(       
-        <IconButton
-            color="inherit"
-            size="small"
+        <IconBtn
             aria-label="edit"
             {...props}
+          
             >
-        <EditIcon fontSize="small" />
-        </IconButton>
+        <EditIcon fontSize={fontSize} />
+        </IconBtn>
  )
 
-}
-export const deleteBtn=(props)=>{
+})
+
+export const DeleteRowBtn=memo((props)=>{
     
     return(       
-        <IconButton
-        color="inherit"
-        size="small"
+        <IconBtn
         aria-label="delete"
         {...props}
       >
-        <DeleteIcon fontSize="small" />
-      </IconButton>
+        <DeleteIcon fontSize={fontSize} />
+      </IconBtn>
     )
    
-   }
+})
+
+export const CancelRowBtn=memo((props)=>{
+    
+  return(       
+      <IconBtn
+      aria-label="cancel"
+      {...props}
+    >
+      <CancelIcon fontSize={fontSize} />
+    </IconBtn>
+  )
+ 
+})
+
+
+export const rowBtnFilter=({name,props})=>{
+  const {dataItem,onClick,...otherProps}=props
+console.log("i hit")
+ const onPress=(...p)=>{
+    onClick && onClick({...p,dataItem:dataItem})
+  }
+
+switch (name.toLowerCase()){
+  case "edit":
+    return <EditRowBtn {...otherProps} onClick={onPress}/>
+  case "delete":
+    return <DeleteRowBtn {...otherProps} onClick={onPress}/>
+  case "undelete":
+    return <DeleteRowBtn {...otherProps} onClick={onPress}/>
+  case "cancel":
+     return <CancelRowBtn {...otherProps} onClick={onPress}/>
+    default :
+    return null;
+}
+}
