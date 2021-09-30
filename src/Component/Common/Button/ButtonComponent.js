@@ -7,19 +7,34 @@ const variant='contained' ;//|'text' 'outlined' | 'contained';
 const fontSize="small";
 
 const Button=memo((props)=>{
-    const {title,design,...otherProps}=props
+    const {title,design,onClick,...otherProps}=props
+    
+const onPress=(p)=>{
+   p.stopPropagation();
+     onClick && onClick(p)
+   }
+   
     return (
-                <Btn title={title} variant={variant}  color={`primary`} {...otherProps}>{title}</Btn>
+                <Btn variant={variant}  color={`primary`} {...otherProps} title={title} onClick={onPress}>{title}</Btn>
     )
 })
 
 const  IconBtn=memo((props)=>{
-const {children,...otherProps}=props
+ 
+      
+const {children,onClick,...otherProps}=props
+
+const onPress=(p)=>{
+   p.stopPropagation();
+     onClick && onClick(p)
+   }
+
   return (      
         <IconButton
         color="inherit"
         size={fontSize}
         {...otherProps}
+        onClick={onPress}
       >
          {
             Children.map(children, x=>x)

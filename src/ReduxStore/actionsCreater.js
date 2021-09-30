@@ -9,3 +9,10 @@ export const GetGridSetting = (payload) => {
         payload:axios.post(`${apiUrl}Common/GetGridSettings` ,{menuid:id} )
     };
 };
+export const GetDropDownDs = (payload) => {
+
+    return{
+        type: actionType.GET_DROPDOWN_DS,
+        payload:axios.post(`${apiUrl}Common/GetDropDownDs` ,payload )
+    };
+};

@@ -41,6 +41,9 @@ class ShowGrid extends Component{
     const {cellActionProps,appState,currentMenu}=this.props
     const {name}=currentMenu
     const {GridSetting}=appState.reducer
+    if((!(name in   GridSetting))){
+    return
+    }
     let column=(TopGridCalcColumns(GridSetting[name],cellActionProps)) 
  
     this.setState((s,p)=>({

@@ -1,31 +1,39 @@
 import React ,{Component,Fragment} from 'react'
-import { Card, CardContent } from '@mui/material';
+import { Button, Card, CardContent } from '@mui/material';
 import { ShowGrid } from '../Common/CusDatagrid/index';
 import AddEdit from './AddEdit'
 
 class Jobs extends Component{
     constructor(props) {
         super(props);
+        this.state={
+           
         }
+        this.popupRef = React.createRef();
+        }
+
      onEdit=(e)=>{
-        console.log('onEdit')
+         this.popupRef.current.openPopup(e.dataItem.row);
      }
      onDelete=(e)=>{
-        
+      
        console.log('onDelete',e)
     }
-componentDidMount(){
-    console.log("job",this.props)
-}
+        componentDidMount(){
+            
+        }
     
     render(){
        
-    const {onEdit,onDelete}=this
+    const {onEdit,onDelete,state,popupRef}=this
         return(
            <Fragment>
-            <Card>  
+         
+           
+         
+             <Card>  
                 <CardContent>
-                    <ShowGrid 
+                <ShowGrid 
                     {...this.props}
                     cellActionProps={{
                         edit:{
@@ -36,9 +44,11 @@ componentDidMount(){
                         }
                     }}
                     />
+                   
                 </CardContent>
+                
             </Card>
-            <AddEdit {...this.props}></AddEdit>
+            <AddEdit {...this.props} ref={popupRef} />
             </Fragment>
         )
     }

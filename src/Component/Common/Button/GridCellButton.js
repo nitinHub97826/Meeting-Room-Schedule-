@@ -10,8 +10,9 @@ export const EditRowBtn=memo((props)=>{
  return(       
         <IconBtn
             aria-label="edit"
+            title="EDIT"
             {...props}
-          
+           
             >
         <EditIcon fontSize={fontSize} />
         </IconBtn>
@@ -24,6 +25,7 @@ export const DeleteRowBtn=memo((props)=>{
     return(       
         <IconBtn
         aria-label="delete"
+        title="DELETE"
         {...props}
       >
         <DeleteIcon fontSize={fontSize} />
@@ -37,6 +39,7 @@ export const CancelRowBtn=memo((props)=>{
   return(       
       <IconBtn
       aria-label="cancel"
+      title="CANCEL"
       {...props}
     >
       <CancelIcon fontSize={fontSize} />
@@ -48,10 +51,10 @@ export const CancelRowBtn=memo((props)=>{
 
 export const rowBtnFilter=({name,props})=>{
   const {dataItem,onClick,...otherProps}=props
-console.log("i hit")
- const onPress=(...p)=>{
+ const onPress=(p)=>{
     onClick && onClick({...p,dataItem:dataItem})
   }
+  
 
 switch (name.toLowerCase()){
   case "edit":

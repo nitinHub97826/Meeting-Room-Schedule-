@@ -6,8 +6,13 @@ const initialState={
 
     GridSetting:{
 
-    },
-    ...loadState
+    }
+    ,DropDownDs:{
+        COMPANYMASTER:{data:[],total:0}
+        ,DESIGNATIONMASTER:{data:[],total:0}
+        ,JOBSTATUMASTER:{data:[],total:0}
+    }
+    ,...loadState
 }
 
 export const reducer=(state=initialState,action)=>{
@@ -22,7 +27,14 @@ export const reducer=(state=initialState,action)=>{
                     }
                 }
          
-
+                case actionType.GET_DROPDOWN_DS:
+                    return {
+                        ...state,
+                        DropDownDs:{
+                            ...state.DropDownDs,
+                            ...action.payload.data
+                        }
+                    }
             default:
                 return {
                     ...state

@@ -1,6 +1,7 @@
-import React from 'react';
+import moment from 'moment';
+import React,{memo} from 'react';
+import { dateFormat } from '../../../../Constant';
 import {rowBtnFilter} from '../../Button';
-// import DateFnsUtils from "@date-io/date-fns";
 
 
 export const CalcColumns=(gridSetting,cellActionProps)=>{
@@ -11,16 +12,20 @@ export const CalcColumns=(gridSetting,cellActionProps)=>{
  let _col=   columns.filter(f=>(!f.hide)).map(x=>{
         const {resizable,...other}=x
        
-
+let val="";
       return {
         ...other,
         renderCell:((params) => {
+          val=""
           switch(params.colDef.type){
             case "date":
-              return formatDate(params.value)
-              default:
-                return params.value
+              val= moment(new Date(params.value)).format(dateFormat);
+              break;
+            default:
+                val=params.value;
+                break;
           }
+          return <span title={val}>{val}</span>;
         }
         )
       };
@@ -41,7 +46,7 @@ export const CalcColumns=(gridSetting,cellActionProps)=>{
                 dataItem:rc
               };
               
-              return React.cloneElement( rowBtnFilter({name :x,props:actionProp}),{key:x})
+              return React.cloneElement(rowBtnFilter({name :x,props:actionProp}),{key:x})
              })
              }
               </div>
