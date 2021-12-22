@@ -7,9 +7,10 @@ class FormPopup extends PureComponent {
     render(){
         const{children,onSubmit,onCancel,...otherProps}=this.props
         return(
-            <form className="form" onSubmit={onSubmit} >
+            
            
             <Popup {...otherProps} >
+                <form className="form" onSubmit={onSubmit} >
             <PopupContents>
                 {
                     React.Children.map(children,x=>x)
@@ -19,8 +20,9 @@ class FormPopup extends PureComponent {
             <SubmitBtn/>
             <CancelBtn onClick={onCancel}/>
           </PopupActions>
+          </form>
             </Popup>
-            </form>
+        
         )
     }
 }

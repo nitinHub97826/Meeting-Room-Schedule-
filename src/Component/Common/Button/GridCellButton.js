@@ -3,6 +3,7 @@ import { IconBtn ,fontSize} from '.';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import CancelIcon from '@mui/icons-material/Close';
+import MenuIcon from '@mui/icons-material/Menu';
 
 export const EditRowBtn=memo((props)=>{
   
@@ -43,6 +44,21 @@ export const CancelRowBtn=memo((props)=>{
       {...props}
     >
       <CancelIcon fontSize={fontSize} />
+    </IconBtn>
+  )
+ 
+})
+
+
+export const MenuIconBtn=memo((props)=>{
+    
+  return(       
+      <IconBtn
+      aria-label="menu"
+      title="MENU"
+      {...props}
+    >
+      <MenuIcon fontSize={fontSize} />
     </IconBtn>
   )
  

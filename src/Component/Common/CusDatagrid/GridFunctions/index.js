@@ -1,15 +1,18 @@
+import { GridToolbarContainer } from '@mui/x-data-grid';
 import moment from 'moment';
 import React,{memo} from 'react';
 import { dateFormat } from '../../../../Constant';
-import {rowBtnFilter} from '../../Button';
+import {rowBtnFilter, toolbarBtnFilter} from '../../Button';
 
 
-export const CalcColumns=(gridSetting,cellActionProps)=>{
-  const {columns,cellActions}=gridSetting;
+export const CalcColumns=({gridSettings,cellActionProps={},...otherProps})=>{
+  const {columns,cellActions}=gridSettings;
     if( !columns || columns.length==0)
     console.error("CalcColumns error: wrong parameter")
 
- let _col=   columns.filter(f=>(!f.hide)).map(x=>{
+    let actionProp={};
+  
+  let _col= columns.filter(f=>(!f.hide)).map(x=>{
         const {resizable,...other}=x
        
 let val="";
@@ -32,7 +35,7 @@ let val="";
     })
     if(cellActions.length!==0)
     {
-   let actionProp={};
+   
    _col=[
     {
       field: 'actions',
@@ -64,13 +67,42 @@ let val="";
     ..._col
   ]
     }
+
+    let _toolbar =toolbarCalc({
+                ...otherProps,
+                gridSettings:gridSettings                
+              })
    
     return {
       _columns:_col
+      ,_toolbar:_toolbar
     };
 }
 
-export const TopGridCalcColumns=(gridSettings,cellActionProps)=>{
+
+export const toolbarCalc=({gridSettings,toobarActionProps,key})=>{
+  const {toolbarActions}=gridSettings;
+  let actionProp={};
+  let _toolbar=null
+  
+  if(toolbarActions.length!==0)
+  {
+  actionProp={};
+  _toolbar= ()=><GridToolbarContainer key={key}>
+        {
+        toolbarActions.map(x=>{
+            actionProp={
+              ...toobarActionProps[x]
+            };
+            return React.cloneElement(toolbarBtnFilter({name :x,props:actionProp}),{key:x})
+           })
+          }
+           </GridToolbarContainer>
+  }
+  return _toolbar;
+  } 
+
+export const TopGridCalcColumns=({gridSettings,...otherProps})=>{
     
   let keys=Object.keys(gridSettings);
   
@@ -79,7 +111,11 @@ export const TopGridCalcColumns=(gridSettings,cellActionProps)=>{
 
   return {
     ...gridSettings[keys[0]],
-    ...CalcColumns(gridSettings[keys[0]],cellActionProps)
+    ...CalcColumns({
+      key: keys[0],
+      ...otherProps
+      ,gridSettings:gridSettings[keys[0]]
+    })
   } 
 }
 

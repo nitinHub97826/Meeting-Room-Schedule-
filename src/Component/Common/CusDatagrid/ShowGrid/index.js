@@ -1,6 +1,6 @@
 import React, {Component } from 'react';
 import CusDataGrid from '../index.js';
-import {CalcColumns,GridDefaultSetting,TopGridCalcColumns} from '../';
+import {GridDefaultSetting,TopGridCalcColumns} from '../';
 import ApiCall from '../../ApiCall/index.js';
 
 
@@ -18,10 +18,12 @@ class ShowGrid extends Component{
 
       },
       columns:{
-        _columns:[]
+        _columns:[],
+        _toolbar:null
       }
     }
-  
+
+    this.apiRef = React.createRef();
   }
   componentDidMount=()=>{
     const {currentMenu,actions,appState}=this.props
@@ -38,13 +40,17 @@ class ShowGrid extends Component{
   }
 
   setColumns=()=>{
-    const {cellActionProps,appState,currentMenu}=this.props
+    const {cellActionProps,toobarActionProps,appState,currentMenu}=this.props
     const {name}=currentMenu
     const {GridSetting}=appState.reducer
     if((!(name in   GridSetting))){
     return
     }
-    let column=(TopGridCalcColumns(GridSetting[name],cellActionProps)) 
+    let column=(TopGridCalcColumns({
+      gridSettings:GridSetting[name],
+      cellActionProps:cellActionProps,
+      toobarActionProps:toobarActionProps
+    })) 
  
     this.setState((s,p)=>({
       ...s
@@ -90,19 +96,22 @@ class ShowGrid extends Component{
 
 
   render(){
-    const {setDataState,state}=this
+    const {setDataState,state,apiRef}=this
     const {data,dataState,columns}=state
+    console.log("i render")
 return(
     <div style={{ height: '90%', width: '100%' }}>
       <CusDataGrid 
-      checkboxSelection
+      apiRef={apiRef}
       idField={columns.idField}
       rows={data.data} 
       rowCount={data.total}
       columns={columns._columns} 
       {...dataState}
       onDataStateChange={setDataState}
-    
+      components={{
+        Toolbar:columns._toolbar,
+      }}
       />
     </div>
 )
@@ -111,3 +120,8 @@ return(
 }
 const _ShowGrid= ApiCall(ShowGrid)
 export {_ShowGrid  as ShowGrid};
+
+ShowGrid.defaultProps = {
+  cellActionProps: {},
+  toobarActionProps:{}
+};

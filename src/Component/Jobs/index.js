@@ -1,6 +1,6 @@
 import React ,{Component,Fragment} from 'react'
 import { Button, Card, CardContent } from '@mui/material';
-import { ShowGrid } from '../Common/CusDatagrid/index';
+import { GridMixList } from '../Common/MixComponents';
 import AddEdit from './AddEdit'
 
 class Jobs extends Component{
@@ -15,6 +15,10 @@ class Jobs extends Component{
      onEdit=(e)=>{
          this.popupRef.current.openPopup(e.dataItem.row);
      }
+     onAdd=(e,a,d)=>{
+        console.log(e,a,d)
+        this.popupRef.current.openPopup();
+     }
      onDelete=(e)=>{
       
        console.log('onDelete',e)
@@ -24,32 +28,41 @@ class Jobs extends Component{
         }
     
     render(){
-       
-    const {onEdit,onDelete,state,popupRef}=this
+    
+    const {onAdd,onEdit,onDelete,popupRef}=this
         return(
            <Fragment>
          
-           
-         
+      
+     
+      
              <Card>  
                 <CardContent>
-                <ShowGrid 
-                    {...this.props}
-                    cellActionProps={{
-                        edit:{
-                            onClick:onEdit
-                        },
-                        delete:{
-                            onClick:onDelete
-                        }
-                    }}
-                    />
-                   
+             <GridMixList
+               {...this.props}
+               cellActionProps={{
+                   edit:{
+                       onClick:onEdit
+                   },
+                   delete:{
+                       onClick:onDelete
+                   }
+               }}
+               toobarActionProps={{
+                   add:{
+                       onClick:onAdd
+                   },
+               }}
+             />
+               
+              
                 </CardContent>
                 
             </Card>
             <AddEdit {...this.props} ref={popupRef} />
-            </Fragment>
+           
+                 
+                  </Fragment>
         )
     }
 }

@@ -6,6 +6,10 @@
     font-size: 30px;
     color:$white;
     background-color:$theme;
+
+    button[type="button"]{
+        float:left;
+    }
     }
     
 .menu-body{

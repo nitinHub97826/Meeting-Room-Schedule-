@@ -1,6 +1,6 @@
 import React ,{Component} from 'react'
 import { Card, CardContent } from '@mui/material';
-import { ShowGrid } from '../Common/CusDatagrid/index';
+ import { GridMixList } from '../Common/MixComponents';
 
 class Companies extends Component{
     constructor(props) {
@@ -25,7 +25,7 @@ componentDidMount=()=>{
            
       <Card>  
         <CardContent>
-          <ShowGrid {...this.props} />
+          <GridMixList {...this.props} />
         </CardContent>
       </Card>
         )

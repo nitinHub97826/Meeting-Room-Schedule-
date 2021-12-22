@@ -4,7 +4,7 @@ import  {Route, BrowserRouter as Router, Switch ,NavLink} from 'react-router-dom
 import { Container } from '@mui/material';
 import * as axiosGlobal from '../axios';
 import {mapDispatchToProps,mapStateToProps} from '../ReduxStore';
-import {ErrorPage} from '../Component/Common'
+import {Button, ErrorPage, MenuIconBtn} from '../Component/Common'
 import './style.scss';
 import MeetingRoomBooking from '../Component/MeetingRoomBooking'
 import InterviewRecord from '../Component/InterviewRecord'
@@ -27,7 +27,7 @@ const components=[
 const Routing=(props)=>{
   const {apiCall}=props
     let [routes,setRoutes]=useState([]);
-   
+    const [showMenulist,showMList]=useState(false);
     
   
     
@@ -62,13 +62,16 @@ const Routing=(props)=>{
         <Router>
             <header className={"application-header"}>
                 {"Weby"}
+                <MenuIconBtn  onClick={()=>showMList(!showMenulist)}/>
             </header> 
             <div className="menu-body"> 
+            {showMenulist &&
                 <div className="menu-list">
                     {
                         routes.map((x)=><NavLink activeClassName="active"  key={x.name} exact={x.exact} to={x.path} >{x.title}</NavLink>)
                     }
                 </div>
+          }
                 <CusSwitch routes={routes}/>
             </div>
         </Router>

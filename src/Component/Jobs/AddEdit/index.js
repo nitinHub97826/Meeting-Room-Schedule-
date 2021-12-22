@@ -9,6 +9,7 @@ const designationDS="DESIGNATIONMASTER";
 const jobStatusDS="JOBSTATUMASTER";
 
 const idleDataItem={
+  id:0,
   CompanyId:null,
   DesignationId:null,
   StatusId:null,
@@ -20,10 +21,10 @@ const idleDataItem={
   OfficalLink:"",
   ContactPerson:"",
   EmailId:"",
-  Flag:'I',
   ContactNo:"",
   LastDateApply:new Date(),
-  NextVisit:new Date()
+  NextVisit:new Date(),
+  Flag:'I'
 }
 export default class AddEdit extends Component{
     constructor(props) {
@@ -31,7 +32,8 @@ export default class AddEdit extends Component{
       
         this.state={
             dataItem:{...idleDataItem},
-            open:false
+            open:false,
+            title:"EDIT"
         }
         
         }
@@ -63,10 +65,14 @@ componentDidMount=()=>{
 }
   
 
-openPopup=(dataItem)=>{
+openPopup=(dataItem={})=>{
+  let Flag=  [0,null,undefined].includes(dataItem.id) ? 'I':'U';
+  let title=(Flag==="I" ? "ADD" : "EDIT")
+  dataItem={...idleDataItem,...dataItem,Flag:Flag}
   this.setState((s,p)=>({
     ...s,
-    dataItem:dataItem,
+    dataItem:{...dataItem},
+    title:title,
     open:true
   }))
 }
@@ -91,6 +97,8 @@ onCancel=()=>{
 
   handleSubmit=(e)=>{
     e && e.preventDefault();
+    console.log("i submut")
+    return
     const {apiCall}=this.props
     const {dataItem}=this.state
   const {Company,Designation,Status,..._datatItem}=dataItem
@@ -102,20 +110,25 @@ onCancel=()=>{
       })  
     }})
   }
+//   <GridToolbarContainer>
+//   <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
+//     Add record
+//   </Button>
+// </GridToolbarContainer>
     render(){
         const {onTextChange,handleSubmit,onCancel,state}=this
-        const {dataItem,open}=state
+        const {dataItem,open,title}=state
         const {appState}=this.props
         const {DropDownDs}=appState.reducer
 
         return(
         
          
-           <FormPopup onSubmit={handleSubmit} onCancel={onCancel} title={"Add"}  open={open}>
+           <FormPopup onSubmit={handleSubmit} onCancel={onCancel} title={title}  open={open}>
       
-            <SelectBox value={dataItem.CompanyId} required={true} label="Company" name={"CompanyId"} options={DropDownDs[companyDS].data} onChange={onTextChange}	/>
-            <SelectBox value={dataItem.DesignationId} required={true} label="Designation" name={"DesignationId"} options={DropDownDs[designationDS].data} onChange={onTextChange}	/>
-            <SelectBox value={dataItem.StatusId} required={true} label="Status" name={"StatusId"} options={DropDownDs[jobStatusDS].data} onChange={onTextChange}	/>
+            <SelectBox value={dataItem.CompanyId} label="Company" name={"CompanyId"} options={DropDownDs[companyDS].data} onChange={onTextChange}	/>
+            <SelectBox value={dataItem.DesignationId} label="Designation" name={"DesignationId"} options={DropDownDs[designationDS].data} onChange={onTextChange}	/>
+            <SelectBox value={dataItem.StatusId} label="Status" name={"StatusId"} options={DropDownDs[jobStatusDS].data} onChange={onTextChange}	/>
             <TextBox  value={dataItem.ApplicationId} label="Application Id" name={"ApplicationId"} type={"text"} onChange={onTextChange}></TextBox>
             <TextBox  value={dataItem.AdvertisementNo} label="Advertisement No" name={"AdvertisementNo"} type={"text"} onChange={onTextChange}></TextBox>
             <TextBox  value={dataItem.AdvertisementLink} label="Advertisement Link" name={"AdvertisementLink"} type={"text"} onChange={onTextChange}></TextBox>
