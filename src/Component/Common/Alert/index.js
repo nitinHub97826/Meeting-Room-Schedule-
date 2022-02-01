@@ -1,5 +1,6 @@
 import React,{memo}from "react";
 import {Alert,Snackbar} from '@mui/material';
+import ReactDOM from 'react-dom';
 
 
 export const AlertMemo=memo((props)=> {
@@ -9,14 +10,16 @@ export const AlertMemo=memo((props)=> {
 const CusAlert =memo((props)=>{
 const {msg,severity="success"}=props
 
-return(
-        <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={true} autoHideDuration={5000}>
-            <AlertMemo severity={severity}>
-                {msg}
-            </AlertMemo>
-        </Snackbar>
-        
-    )
+ReactDOM.render(
+    <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={true} autoHideDuration={5000}>
+    <AlertMemo severity={severity}>
+        {msg}
+    </AlertMemo>
+    </Snackbar>
+    ,
+    document.getElementById('AlertContainer')
+  );
+
 })
 
 export default CusAlert;

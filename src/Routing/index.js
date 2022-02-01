@@ -12,6 +12,7 @@ import Companies from '../Component/Companies'
 import Welcome from '../Component/Welcome'
 import Jobs from '../Component/Jobs'
 import ApiCall from '../Component/Common/ApiCall';
+import FileConvertion from '../Component/FileConvertion';
 
 
 
@@ -21,6 +22,7 @@ const components=[
     ,MeetingRoomBooking
     ,Companies
     ,Jobs
+    ,FileConvertion
 ]
 
 
@@ -38,7 +40,7 @@ const Routing=(props)=>{
             return (x.name && x.name|| x.type.name) ===r.name
         }))))
         r.main=()=><r.component currentMenu={r} {...props}/>
-        r.sidebar=()=>r.title
+        r.sidebar=()=>r.titles
         return r;
     })
       setRoutes(r)

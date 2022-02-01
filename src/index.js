@@ -14,9 +14,9 @@ import Routing from './Routing'
 ReactDOM.render(
   // <MuiThemeProvider theme={theme}>
   <Provider store={store}>
-   {/* <React.StrictMode> */}
+   <React.StrictMode>
    <Routing />
-   {/* </React.StrictMode> */}
+   </React.StrictMode>
   </Provider>
   // </MuiThemeProvider>
   ,

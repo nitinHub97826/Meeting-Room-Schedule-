@@ -1,0 +1,19 @@
+.Folderlist{
+
+    .css-konndc-MuiListItemText-root{
+        align-items: baseline;
+        word-break: break-word;
+        &.odd{
+            width: 55%;
+            }
+        &.even{
+            width: 43%;
+        }
+    }
+  .css-uls1yk-MuiDivider-root{
+    margin-left: 0;
+  }
+  .css-i4bv87-MuiSvg{
+      align-self: center;
+  }
+}

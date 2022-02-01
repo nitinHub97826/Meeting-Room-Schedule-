@@ -121,6 +121,7 @@ import { FolderList,ListItem,ListItemText } from '../../List';
           <FolderList height={height}
           data={data.data}
           {...columns.listColumns}
+          idField={columns.idField}
           >
          
      
